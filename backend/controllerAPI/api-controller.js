@@ -34,7 +34,8 @@ router.get('/categories/list', (req, res) => {
 
 // SEARCH events by date, location, and category
 router.get('/search', (req, res) => {
-  const { date, location, categoryId } = req.query;
+  console.log('Received query params:', req.query);
+  const { date, location, categoryID } = req.query;
 
   let sql = `
     SELECT e.EventID, e.EventName, e.Description, e.EventDate, e.Location,
@@ -58,9 +59,9 @@ router.get('/search', (req, res) => {
     params.push(`%${location}%`); // wildcard search, i.e. doesnt have to be full word
   }
 
-  if (categoryId) {
+  if (categoryID) {
     sql += " AND e.CategoryID = ?";
-    params.push(categoryId);
+    params.push(categoryID);
   }
 
   connection.query(sql, params, (err, results) => {
