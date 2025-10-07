@@ -1,3 +1,75 @@
+# PROG2002-A3
+
+Gold Coast Charity Connect
+PROG2002 Web Development II - Assessment 3
+By Grace Sutton (#23290509) & Kydan Jenkins (#?)
+
+Gold Coast Charity Connect is a full-stack web application that centralises charity events within the Gold Coast area. 
+
+This A3 version extends the A2 project by introducing event registration, an admin dashboard, and a RESTful API, now restructured using the Angular framework for the client-side interface.
+
+## Overview
+
+The application consists of three parts:
+1. Client-Side Website (Angular) – Allows users to browse events, view details, and register.
+
+2. Admin-Side Website (Angular) – Enables administrators to create, edit, or delete events.
+
+3. Backend RESTful API (Node.js + Express + MySQL) – Handles all server-side logic and data operations.
+
+## Getting Started
+
+### Dependencies
+
+* Node.js (v16 or higher recommended)
+* MySQL (v8 or higher)
+* npm packages: express, body-parser, mysql2, cors
+* Angular CLI v19.2.4 or later
+
+### Installing
+
+#### Backend Setup
+
+1. Install dependencies:
+
+``` bash
+cd backend
+npm install
+```
+
+2. Configure database:
+* Set up a MySQL database called ```charityevents_db```.
+* Import the provided schema SQL file (```charityevents_db.sql```).
+* Update the database credentials in ```event_db.js``` if required.
+
+3. Start the backend server: ```npm start``` OR ```node server.js```
+
+Backend runs on http://localhost:8080
+
+#### Client Setup
+
+1. Install dependencies:
+
+``` bash
+cd client
+npm install
+```
+
+2. Run the development server:
+
+``` bash
+ng serve
+```
+
+Then open http://localhost:4200 in your browser.
+
+## API Endpoints
+
+* GET /api/events → all events with category info
+* GET /api/events/:id → details of a single event
+* GET /api/events/categories/list → list of categories
+* GET /api/events/search?date=&location=&categoryID= → search with filters
+
 # PROG2002A3
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.4.
