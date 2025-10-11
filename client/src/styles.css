@@ -175,11 +175,12 @@ h3 a:hover {
   padding: 4px 8px;
 }
 
-#registerButton {
+#registerButton, #registerForm button {
   display: inline-block;
   margin: 2rem auto 0;
   padding: 10px 30px;
   font-size: 16px;
+  margin-bottom: 30px;
 }
 
 @media (max-width: 1080px) {

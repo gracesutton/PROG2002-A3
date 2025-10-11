@@ -1,0 +1,71 @@
+<head>
+    <title>Event Registration</title>
+</head>
+
+<body>
+    <!-- Register Display -->
+    <h2>Event Registration</h2>
+    <section id="event-page" *ngIf="!loading && event; else loadingOrError">
+        <div id="leftColumn">
+            <div id="eventDetailsDiv">
+                <h3>Register for {{ event.EventName }}</h3>
+                
+                <form id="registerForm" (ngSubmit)="register()">
+                    <div class="form-row">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" [(ngModel)]="name" name="name" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" [(ngModel)]="email" name="email" required>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="tickets">Number of Tickets:</label>
+                        <select id="tickets" [(ngModel)]="tickets" name="tickets" required>
+                            <option *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]" [value]="n">{{ n }}</option>
+                        </select>
+                    </div>
+
+                    <!-- Total Price -->
+                    <p *ngIf="event?.TicketPrice! > 0" class="total-display">
+                        Total: <strong>${{ ((event?.TicketPrice ?? 0) * tickets).toFixed(2) }}</strong>
+                    </p>
+
+                    <p *ngIf="event && event?.TicketPrice == 0" class="total-display">
+                        Total: <strong>Free</strong>
+                    </p>
+
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            <div id="orgDetailsDiv">
+                <h4>Organiser Details</h4>
+                <p>Name: {{ event.OrganisationName }}</p>
+                <p>Description: {{ event.OrganisationDescription }}</p>
+                <p>Website: {{ event.Website }}</p>
+                <p>Contact: {{ event.Phone }}</p>
+            </div>
+        </div>
+
+        <div id="rightColumn">
+            <div id="eventImageDiv">
+                <img [src]="event.CategoryImage" [alt]="event.EventName" class="category-image" />
+            </div>
+            <div id="goal-progress-div">
+                <h4>{{ event.EventName }}</h4>
+                <p>{{ event.Description }}</p>
+                <p>Date: {{ event.EventDate | date:'longDate' }}</p>
+                <p>Location: {{ event.Location }}</p>
+                <p>Ticket Price: {{ event.TicketPrice == 0 ? 'Free' : ('$' + event.TicketPrice) }}</p>
+            </div>
+        </div>
+    </section>
+
+    <ng-template #loadingOrError>
+        <p *ngIf="loading">Loading event...</p>
+        <p *ngIf="!loading && errorMsg">{{ errorMsg }}</p>
+    </ng-template>
+
+</body>

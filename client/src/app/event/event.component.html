@@ -6,6 +6,7 @@
 
   <!-- Event Display -->
   <section id="event-page" *ngIf="!loading && event; else loadingOrError">
+
     <div id="leftColumn">
       <div id="eventDetailsDiv">
         <h2>{{ event.EventName }}</h2>
@@ -14,7 +15,22 @@
         <p>Location: {{ event.Location }}</p>
         <p>Ticket Price: {{ event.TicketPrice == 0 ? 'Free' : ('$' + event.TicketPrice) }}</p>
       </div>
-      <button id="registerButton" onclick="alert('This feature is currently under construction.');">Register</button>
+
+      <button id="registerButton" [routerLink]="['/register', event.EventID]">Register</button>
+      
+      <h3>Registrations</h3>
+      <div *ngIf="registrations.length; else noRegos">
+        <ul>
+          <li *ngFor="let r of registrations">
+            {{ r.userName }} purchased {{ r.tickets }} ticket(s) on ({{ r.date | date:'shortDate' }})
+          </li>
+        </ul>
+      </div>
+      
+      <ng-template #noRegos>
+        <p>There are no registrations yet for this event.</p>
+      </ng-template>
+
     </div>
 
     <div id="rightColumn">

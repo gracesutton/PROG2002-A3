@@ -1,0 +1,38 @@
+#registerForm {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 0 auto;
+  text-align: left;
+  max-width: 420px;
+}
+
+#registerForm div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+#registerForm label {
+  font-weight: 600;
+  width: 110px;
+  text-align: right;
+  color: #333;
+}
+
+#registerForm input,
+#registerForm select {
+  flex: 1;
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.total-display {
+  text-align: center;
+  font-size: 1rem;
+  margin-top: 10px;
+  font-weight: 500;
+}

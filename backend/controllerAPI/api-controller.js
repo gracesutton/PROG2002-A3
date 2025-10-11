@@ -1,7 +1,6 @@
 // import express, connect to DB, and create a router
 const express = require('express');
 const connection = require('../event_db.js');
-const e = require('express');
 const router = express.Router();
 
 // READ all events with images from categories

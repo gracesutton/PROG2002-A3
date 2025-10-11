@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { EventService } from '../services/event.service';
 import { Event } from '../models/event';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-search',
-  imports: [CommonModule, FormsModule, RouterModule],
+  standalone: false,
   templateUrl: './search.component.html',
   styleUrl: './search.component.css'
 })
