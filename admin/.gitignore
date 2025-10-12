@@ -1,5 +1,9 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
+# Angular build artefacts and environment files
+.angular/
+dist/
+
 # Compiled output
 /dist
 /tmp
