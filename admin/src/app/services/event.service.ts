@@ -40,13 +40,23 @@ export class EventService {
   }
 
   // Get event by ID
-  getEventById(id: number): Observable<{ event: Event; registrations: any[] }> {
+  getEventById(id: number): Observable<Event> {
+    return this.http.get<Event>(`${this.apiUrl}/${id}`);
+  }
+
+  // Get event by ID including registrations
+  getEventByIdWithRegistrations(id: number): Observable<{ event: Event; registrations: any[] }> {
     return this.http.get<{ event: Event; registrations: any[] }>(`${this.apiUrl}/${id}`);
   }
 
   // Delete event by ID
   deleteEvent(id: number): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  // Update event by ID
+  updateEvent(id: number, event: Event): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, event);
   }
 
 }
