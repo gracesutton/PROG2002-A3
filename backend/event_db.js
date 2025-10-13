@@ -1,18 +1,19 @@
 const mysql = require('mysql2');
 
-// create the connection to database
-const connection = mysql.createConnection({
-  host: 'localhost',
+const connection = mysql.createPool({
+  host: '127.0.0.1',    
+  port: 3306,
   user: 'root',
-  password: 'verysecurepassword',
+  password: '23924073',  
   database: 'charityevents_db',
-  port: 3306
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
 });
 
-// connect to database
-connection.connect((err) => {
-  if (err) throw err;
-  console.log('Database connection successful');
+// optional startup probe
+connection.query('SELECT 1', (err) => {
+  console.log(err ? 'DB connect failed: ' + err.message : 'Database connection successful');
 });
 
 module.exports = connection;
