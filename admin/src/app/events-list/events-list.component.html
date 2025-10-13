@@ -47,7 +47,7 @@
                     <td>{{ event.CurrentProgress | currency:'AUD' }}</td>
                     <td>{{ event.OrganisationName }}</td>
                     <!-- <td>{{ event.Status }}</td> -->
-                    <td class="right">
+                    <td class="centred">
                         <button [routerLink]="['/admin/event-update', event.EventID]">Edit</button>
                         <button (click)="deleteEvent(event.EventID)">Delete</button>
                     </td>
