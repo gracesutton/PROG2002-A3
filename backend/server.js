@@ -20,8 +20,26 @@ app.use(cors());
 //to parse URL-encoded data
 app.use(bodyParser.urlencoded({extended:true}));
 
+//to parse JSON request bodies
+app.use(bodyParser.json());
+
 // use the controller for REST endpoints
 app.use('/api/events', apiRouter);
+
+//mount for registrations router
+const registrationsRouter = require('./routes/registrations');
+app.use('/api/registrations', registrationsRouter);
+
+//also added for quick checks to verify server + db
+app.get('/health', (_req, res) => {
+  res.json({ ok: true, time: new Date().toISOString() });
+});
+app.get('/api/test-db', (_req, res) => {
+  connection.query('SELECT COUNT(*) AS totalEvents FROM Events', (err, rows) => {
+    if (err) return res.status(500).json({ error: 'DB error' });
+    res.json(rows[0]);
+  });
+});
 
 // I dont think we need the below routes as angular will handle it now 
 
