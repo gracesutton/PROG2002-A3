@@ -4,13 +4,16 @@ export interface Event {
   Description: string;
   EventDate: string;
   Location: string;
-  CategoryName: string;
-  CategoryImage: string;
+
+  CategoryID?: number;
+  CategoryName?: string;
+  CategoryImage?: string;
 
   TicketPrice?: number;
   GoalAmount?: number;
   CurrentProgress?: number;
 
+  OrganisationID?: number;
   OrganisationName?: string;
   OrganisationDescription?: string;
   Website?: string;

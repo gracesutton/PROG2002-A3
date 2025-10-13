@@ -1,6 +1,6 @@
 const mysql = require('mysql2');
 
-const connection = mysql.createPool({
+const pool = mysql.createPool({
   host: '127.0.0.1',    
   port: 3306,
   user: 'root',
@@ -12,8 +12,8 @@ const connection = mysql.createPool({
 });
 
 // optional startup probe
-connection.query('SELECT 1', (err) => {
+pool.query('SELECT 1', (err) => {
   console.log(err ? 'DB connect failed: ' + err.message : 'Database connection successful');
 });
 
-module.exports = connection;
+module.exports = pool.promise();

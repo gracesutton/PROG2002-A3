@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EventService } from '../services/event.service';
 import { Event } from '../models/event';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-events-update',
@@ -18,12 +19,14 @@ export class EventsUpdateComponent {
   errorMsg = '';
   loading = true;
 
-
+  categories: any[] = [];
+  organisations: any[] = [];
 
   constructor(
     private route: ActivatedRoute, 
     public router: Router,
     private eventService: EventService,
+    private http: HttpClient
   ) { }
 
   ngOnInit(): void {
@@ -37,6 +40,22 @@ export class EventsUpdateComponent {
     }
 
     this.loadEvent();
+    this.loadCategories();
+    this.loadOrganisations();
+  }
+
+  loadCategories() {
+    this.http.get<any[]>('http://localhost:8080/api/admin/categories').subscribe({
+      next: (data) => (this.categories = data),
+      error: (err) => console.error('Failed to load categories:', err)
+    });
+  }
+
+  loadOrganisations() {
+    this.http.get<any[]>('http://localhost:8080/api/admin/organisations').subscribe({
+      next: (data) => (this.organisations = data),
+      error: (err) => console.error('Failed to load organisations:', err)
+    });
   }
 
   loadEvent(): void {

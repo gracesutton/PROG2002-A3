@@ -40,8 +40,8 @@ assertRouter('adminRoutes', require('./routes/admin'));
 
 
 // Mount routes
-app.use('/api', apiController);
 app.use('/api/events', eventsController);
+app.use('/api', apiController);
 app.use('/api/categories', categoriesController);
 app.use('/api/organisations', organisationsController);
 app.use('/api/registrations', registrationsController);

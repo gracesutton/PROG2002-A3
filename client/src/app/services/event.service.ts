@@ -20,7 +20,7 @@ export class EventService {
 
   // Get all categories
   getCategories(): Observable<Event[]> {
-    return this.http.get<Event[]>(`${this.apiUrl}/categories/list`);
+    return this.http.get<Event[]>('http://localhost:8080/api/categories/list');
   }
 
   // Search events based on parameters

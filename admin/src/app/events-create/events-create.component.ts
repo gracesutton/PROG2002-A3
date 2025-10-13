@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EventService } from '../services/event.service';
 import { Event } from '../models/event';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-events-create',
@@ -13,43 +14,73 @@ import { Event } from '../models/event';
 })
 export class EventsCreateComponent {
 
-    event: Event = {
-      EventID: 0,
-      EventName: '',
-      Description: '',
-      EventDate: '',
-      Location: '',
-      CategoryName: '',
-      CategoryImage: '',
-      TicketPrice: 0,
-      GoalAmount: 0,
-      CurrentProgress: 0,
-      OrganisationName: ''
-    };
 
-    submitting = false;
+  categories: any[] = [];
+  organisations: any[] = [];
 
-    constructor(private eventService: EventService, public router: Router) { }
+  event: Event = {
+    EventID: 0,
+    EventName: '',
+    Description: '',
+    EventDate: '',
+    Location: '',
+    CategoryName: '',
+    CategoryID: 0,
+    OrganisationID: 0,
+    TicketPrice: 0,
+    GoalAmount: 0,
+    CurrentProgress: 0,
+    OrganisationName: ''
+  };
 
-    createEvent() {
+  submitting = false;
 
-      if (!this.event.EventName || !this.event.EventDate || !this.event.Location) {
-        alert('Please fill in all required fields.');
-        return;
-      }
+  constructor(
+    private eventService: EventService, 
+    public router: Router, 
+    private http: HttpClient
+  ) { }
 
-      this.submitting = true;
-      this.eventService.createEvent(this.event).subscribe({
-        next: () => {
-          alert('Event created successfully!');
-          this.router.navigate(['/admin/event-list']);
-        },
-        error: (err) => {
-          console.error('Error creating event:', err);
-          alert('Error creating event. Please try again.');
-          this.submitting = false;
-        }
-      });
+
+  ngOnInit(): void {
+    this.loadCategories();
+    this.loadOrganisations();
+  }
+
+  loadCategories() {
+    this.http.get<any[]>('http://localhost:8080/api/admin/categories').subscribe({
+      next: (data) => (this.categories = data),
+      error: (err) => console.error('Failed to load categories:', err)
+    });
+  }
+
+  loadOrganisations() {
+    this.http.get<any[]>('http://localhost:8080/api/admin/organisations').subscribe({
+      next: (data) => (this.organisations = data),
+      error: (err) => console.error('Failed to load organisations:', err)
+    });
+  }
+
+  createEvent() {
+
+    if (!this.event.EventName || !this.event.EventDate || !this.event.Location) {
+      alert('Please fill in all required fields.');
+      return;
     }
+
+    this.submitting = true;
+    console.log('Sending new event:', this.event);
+    this.eventService.createEvent(this.event).subscribe({
+      next: () => {
+        alert('Event created successfully!');
+        this.router.navigate(['/admin/event-list']);
+      },
+      error: (err) => {
+        console.error('Error creating event:', err);
+        alert('Error creating event. Please try again.');
+        this.submitting = false;
+      }
+    });
+  }
 
 }

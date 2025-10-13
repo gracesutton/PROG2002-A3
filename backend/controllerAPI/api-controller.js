@@ -1,10 +1,10 @@
 // import express, connect to DB, and create a router
 const express = require('express');
-const connection = require('../event_db.js');
+const db = require('../event_db.js');
 const router = express.Router();
 
 // READ all events with images from categories
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   const sql = `
     SELECT e.*,
            c.CategoryName, c.CategoryImage,
@@ -14,28 +14,28 @@ router.get('/', (req, res) => {
     JOIN Organisations o ON e.OrganisationID = o.OrganisationID
     ORDER BY e.EventID ASC;
   `;
-  connection.query(sql, (err, results) => {
-    if (err) {
-      console.error('Error retrieving events:', err);
-    } else {
-        res.send(results);
-    }
-  });
+  try {
+    const [rows] = await db.query(sql);
+    res.json(rows);
+  } catch (err) {
+    console.error('Error retrieving events:', err);
+    res.status(500).json({ error: 'Database query failed' });
+  }
 });
 
 // GET all categories
-router.get('/categories/list', (req, res) => {
-  connection.query( 'SELECT * FROM Categories ORDER BY CategoryName ASC', (err, results) => {
-      if (err) {
-        console.error('Error retrieving categories:', err);
-      } else {
-      res.send(results);
-      }
-    });
+router.get('/categories/list', async (req, res) => {
+  try {
+    const [rows] = await db.query('SELECT * FROM Categories ORDER BY CategoryName ASC');
+    res.json(rows);
+  } catch (err) {
+    console.error('Error retrieving categories:', err);
+    res.status(500).json({ error: 'Database query failed' });
+  }
 });
 
 // SEARCH events by date, location, and category
-router.get('/search', (req, res) => {
+router.get('/search', async (req, res) => {
   console.log('Received query params:', req.query);
   const { date, location, categoryID } = req.query;
 
@@ -66,19 +66,18 @@ router.get('/search', (req, res) => {
     params.push(categoryID);
   }
 
-  connection.query(sql, params, (err, results) => {
-    if (err) {
+  try {
+    const [rows] = await db.query(sql, params);
+    res.json(rows);
+  } catch (err) {
       console.error('Error performing search:', err);
       return res.status(500).json({ error: 'Database query failed' });
     }
-    res.json(results);
-  
   });
-});
 
 
 // READ single event by ID
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   const sql = `
     SELECT e.EventID, e.EventName, e.Description, e.EventDate, e.Location,
            e.TicketPrice, e.GoalAmount, e.CurrentProgress,
@@ -89,14 +88,13 @@ router.get('/:id', (req, res) => {
     JOIN Organisations o ON e.OrganisationID = o.OrganisationID
     WHERE e.EventID = ?
   `;
-  connection.query(sql, [req.params.id], (err, results) => {
-    if (err) {
-      console.error('Error retrieving event:', err);
-    } else {
-        res.send(results[0]);
-        
-    }
-  });
+  try {
+    const [rows] = await db.query(sql, [req.params.id]);
+    res.json(rows[0]) || null;
+  } catch (err) {
+    console.error('Error retrieving event:', err);
+    res.status(500).json({ error: 'Database query failed' });
+  }
 });
 
 // export the router

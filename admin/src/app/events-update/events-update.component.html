@@ -18,8 +18,15 @@
         <label>Location</label>
         <input type="text" [(ngModel)]="event.Location" name="Location" required />
 
-        <label>Category Name</label>
-        <input type="text" [(ngModel)]="event.CategoryName" name="CategoryName" />
+        <label>Category</label>
+        <select [(ngModel)]="event.CategoryID" name="CategoryID" required>
+            <option *ngFor="let c of categories" [value]="c.CategoryID">{{ c.CategoryName }}</option>
+        </select>
+
+        <label>Organisation</label>
+        <select [(ngModel)]="event.OrganisationID" name="OrganisationID" required>
+            <option *ngFor="let o of organisations" [value]="o.OrganisationID">{{ o.OrganisationName }}</option>
+        </select>
 
         <label>Ticket Price</label>
         <input type="number" [(ngModel)]="event.TicketPrice" name="TicketPrice" />
@@ -29,9 +36,6 @@
 
         <label>Current Progress</label>
         <input type="number" [(ngModel)]="event.CurrentProgress" name="CurrentProgress" />
-
-        <label>Organisation Name</label>
-        <input type="text" [(ngModel)]="event.OrganisationName" name="OrganisationName" />
 
         <div class="buttons">
             <button type="submit" [disabled]="!form.valid">Save</button>

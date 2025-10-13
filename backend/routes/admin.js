@@ -17,7 +17,7 @@ router.get('/events', async (req, res) => {
   const sql = `
     SELECT * FROM events
     ${where.length ? 'WHERE ' + where.join(' AND ') : ''}
-    ORDER BY EventDate, StartTime
+    ORDER BY EventID
   `;
 
   try {
@@ -31,6 +31,7 @@ router.get('/events', async (req, res) => {
 
 // Create event
 router.post('/events', async (req, res) => {
+  console.log('Received POST /events with body:', req.body);
   const {
     EventName, Description, EventDate, EndDate,
     StartTime, EndTime, Location,
@@ -52,9 +53,12 @@ router.post('/events', async (req, res) => {
        Location ?? null, TicketPrice, GoalAmount, CurrentProgress, IsActive ? 1 : 0, Suspended ? 1 : 0,
        OrganisationID, CategoryID]
     );
+    console.log('Insert successful with ID:', result.insertId);
     res.status(201).json({ ok: true, EventID: result.insertId });
   } catch (e) {
+    console.error('SQL ERROR during event creation:');
     console.error(e);
+    res.status(500).json({ error: e.sqlMessage || e.message || 'Create failed' });
     res.status(500).json({ error: 'Create failed' });
   }
 });
