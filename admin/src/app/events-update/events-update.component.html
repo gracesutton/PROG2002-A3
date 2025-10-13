@@ -1,0 +1,45 @@
+<section class="edit-event" *ngIf="!loading; else loadingTemplate">
+
+    <h2>Edit Event</h2>
+
+    <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+
+    <form id="edit-event-form" *ngIf="event" (ngSubmit)="updateEvent()" #form="ngForm">
+        
+        <label>Event Name</label>
+        <input type="text" [(ngModel)]="event.EventName" name="EventName" required />
+
+        <label>Description</label>
+        <textarea [(ngModel)]="event.Description" name="Description"></textarea>
+
+        <label>Date</label>
+        <input type="date" [(ngModel)]="event.EventDate" name="EventDate" required />
+
+        <label>Location</label>
+        <input type="text" [(ngModel)]="event.Location" name="Location" required />
+
+        <label>Category Name</label>
+        <input type="text" [(ngModel)]="event.CategoryName" name="CategoryName" />
+
+        <label>Ticket Price</label>
+        <input type="number" [(ngModel)]="event.TicketPrice" name="TicketPrice" />
+
+        <label>Goal Amount</label>
+        <input type="number" [(ngModel)]="event.GoalAmount" name="GoalAmount" />
+
+        <label>Current Progress</label>
+        <input type="number" [(ngModel)]="event.CurrentProgress" name="CurrentProgress" />
+
+        <label>Organisation Name</label>
+        <input type="text" [(ngModel)]="event.OrganisationName" name="OrganisationName" />
+
+        <div class="buttons">
+            <button type="submit" [disabled]="!form.valid">Save</button>
+            <button type="button" (click)="router.navigate(['/admin/event-list'])">Cancel</button>
+        </div>
+    </form>
+</section>
+
+<ng-template #loadingTemplate>
+    <p>Loading event...</p>
+</ng-template>

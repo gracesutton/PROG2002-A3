@@ -7,9 +7,12 @@ const router = express.Router();
 router.get('/', (req, res) => {
   const sql = `
     SELECT e.EventID, e.EventName, e.Description, e.EventDate, e.Location,
-           c.CategoryName, c.CategoryImage
+           c.CategoryName, c.CategoryImage,
+           e.TicketPrice, e.GoalAmount, e.CurrentProgress,
+           o.OrganisationName
     FROM Events e
     JOIN Categories c ON e.CategoryID = c.CategoryID
+    JOIN Organisations o ON e.OrganisationID = o.OrganisationID;
   `;
   connection.query(sql, (err, results) => {
     if (err) {
