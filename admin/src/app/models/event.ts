@@ -2,7 +2,7 @@ export interface Event {
   EventID: number;
   EventName: string;
   Description: string;
-  EventDate: Date;
+  EventDate: string;
   Location: string;
   CategoryName: string;
   CategoryImage: string;

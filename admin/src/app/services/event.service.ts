@@ -59,4 +59,8 @@ export class EventService {
     return this.http.put(`${this.apiUrl}/${id}`, event);
   }
 
+  // Create new event
+  createEvent(event: Event): Observable<Event> {
+    return this.http.post<Event>(this.apiUrl, event);
+  }
 }
