@@ -15,4 +15,7 @@ export interface Event {
   OrganisationDescription?: string;
   Website?: string;
   Phone?: string;
+
+  Status?: string; // e.g. Active, Past, Suspended
+  RegistrationCount?: number;
 }

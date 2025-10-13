@@ -1,18 +1,6 @@
 <section class="event-list">
     <h2>All Charity Events</h2>
 
-    <!-- <div *ngIf="upcomingEvents.length; else noUpcoming">
-        <div *ngFor="let event of upcomingEvents" class="event">
-            <img [src]="event.CategoryImage" class="category-image" [alt]="event.EventName" />
-            <div class="event-details">
-                <h3><a [routerLink]="['/event', event.EventID]">{{ event.EventName }}</a></h3>
-                <p>{{ event.Description }}</p>
-                <p>Date: {{ event.EventDate | date:'longDate' }}</p>
-                <p>Location: {{ event.Location }}</p>
-            </div>
-        </div>
-    </div> -->
-
     <div *ngIf="events.length; else noEvents">
         <!-- Events table -->
         <table>
@@ -24,13 +12,13 @@
                     <th>Date</th>
                     <th>Location</th>
                     <th>Category</th>
-                    <th>Image</th>
                     <th>Ticket Price</th>
                     <th>Goal Amount</th>
                     <th>Current Progress</th>
                     <th>Organisation</th>
-                    <!-- <th>Status</th> -->
-                    <th class="right">Actions</th>
+                    <th>Status</th>
+                    <th>Registrations</th>
+                    <th class="centred">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -41,12 +29,12 @@
                     <td>{{ event.EventDate | date:'mediumDate' }}</td>
                     <td>{{ event.Location }}</td>
                     <td>{{ event.CategoryName }}</td>
-                    <td>{{ event.CategoryImage }}</td>
                     <td>{{ event.TicketPrice | currency:'AUD' }}</td>
                     <td>{{ event.GoalAmount | currency:'AUD' }}</td>
                     <td>{{ event.CurrentProgress | currency:'AUD' }}</td>
                     <td>{{ event.OrganisationName }}</td>
-                    <!-- <td>{{ event.Status }}</td> -->
+                    <td>{{ event.Status || "Unknown" }}</td>
+                    <td>{{ event.RegistrationCount || 0 }}</td>
                     <td class="centred">
                         <button [routerLink]="['/admin/event-update', event.EventID]">Edit</button>
                         <button (click)="deleteEvent(event.EventID)">Delete</button>
