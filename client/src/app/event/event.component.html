@@ -19,10 +19,11 @@
       <button id="registerButton" [routerLink]="['/register', event.EventID]">Register</button>
       
       <h3>Registrations</h3>
-      <div *ngIf="registrations.length; else noRegos">
+      <div *ngIf="registrations?.length; else noRegos" class="registrations-list">
         <ul>
-          <li *ngFor="let r of registrations">
-            {{ r.userName }} purchased {{ r.tickets }} ticket(s) on ({{ r.date | date:'shortDate' }})
+          <li *ngFor="let r of registrations" class="registration-item">
+            <!-- {{ r | json }} -->
+            <strong>{{ r.FullName }}</strong> purchased <strong>{{ r.Tickets }} ticket(s)</strong> on {{ r.CreatedAt | date:'fullDate' }}
           </li>
         </ul>
       </div>
@@ -30,7 +31,6 @@
       <ng-template #noRegos>
         <p>There are no registrations yet for this event.</p>
       </ng-template>
-
     </div>
 
     <div id="rightColumn">

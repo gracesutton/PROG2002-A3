@@ -45,7 +45,10 @@ export class EventComponent {
           // current backend format without registrations
           this.event = data as Event;
           this.regoService.getRegistrationsByEvent(id).subscribe({
-            next: (regos) => this.registrations = regos || [],
+            next: (regos) => {
+              console.log('Fetched registrations:', regos);
+              this.registrations = regos || []
+            },
             error: () => this.registrations = []
           });
         }
