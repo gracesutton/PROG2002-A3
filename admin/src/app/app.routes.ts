@@ -10,6 +10,6 @@ export const routes: Routes = [
     {path:"admin", component:AdminHomeComponent},
     {path:"admin/event-list", component:EventsListComponent},
     {path:"admin/event-create", component:EventsCreateComponent},
-    {path:"admin/event-edit/:id", component:EventsUpdateComponent},
+    {path:"admin/event-update/:id", component:EventsUpdateComponent},
 
 ];

@@ -6,6 +6,7 @@ import { routes } from './app.routes';
 import { importProvidersFrom } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
@@ -14,7 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     
     // Global modules
-    importProvidersFrom(CommonModule, FormsModule),
+    importProvidersFrom(CommonModule, RouterModule, FormsModule),
     provideHttpClient()
   ]
 };
