@@ -9,7 +9,7 @@ router.get('/event/:id', (req, res) => {
 
   const sql = `
     SELECT RegistrationID, EventID, FullName, Email, Phone, Tickets, Notes, CreatedAt
-    FROM Registrations
+    FROM registrations
     WHERE EventID = ?
     ORDER BY CreatedAt DESC
   `;
@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
     if (rows.length === 0) return res.status(404).json({ error: 'Event not found' });
 
     const insert = `
-      INSERT INTO Registrations (EventID, FullName, Email, Phone, Tickets, Notes)
+      INSERT INTO registrations (EventID, FullName, Email, Phone, Tickets, Notes)
       VALUES (?, ?, ?, ?, ?, ?)
     `;
     db.query(
@@ -50,7 +50,7 @@ router.post('/', (req, res) => {
         }
         db.query(
           `SELECT RegistrationID, EventID, FullName, Email, Phone, Tickets, Notes, CreatedAt
-           FROM Registrations WHERE RegistrationID = ?`,
+           FROM registrations WHERE RegistrationID = ?`,
           [result.insertId],
           (e3, created) => {
             if (e3) { console.error('fetch created error:', e3); return res.status(500).json({ error: 'Server error' }); }

@@ -16,7 +16,10 @@ export class RegisterComponent {
   event!: Event;
   name: string = '';
   email: string = '';
+  phone: string = '';
   tickets: number = 1;
+  notes: string = '';
+
 
   loading: boolean = true;
   errorMsg: string = '';
@@ -63,16 +66,19 @@ export class RegisterComponent {
     }
 
     const registration = {
-      eventID: this.eventID,
-      userName: this.name,
-      email: this.email,
-      tickets: this.tickets,
-      date: new Date().toISOString().split('T')[0] // current date in YYYY-MM-DD format
+      EventID: this.eventID,
+      FullName: this.name,
+      Email: this.email,
+      Phone: this.phone,
+      Tickets: this.tickets,
+      Notes: this.notes,
+      // CreatedAt will be handled automatically by MySQL
     };
+
+    console.log('Submitting registration:', registration);
 
     this.regoService.registerForEvent(registration).subscribe({
       next: () => {
-        console.log('Submitting registration:', registration);
         alert('Registration successful!');
         this.router.navigate(['/event', this.eventID]);
       },

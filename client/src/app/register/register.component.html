@@ -22,10 +22,20 @@
                     </div>
 
                     <div class="form-row">
+                        <label for="phone">Phone:</label>
+                        <input type="text" id="phone" [(ngModel)]="phone" name="phone" required>
+                    </div>                    
+
+                    <div class="form-row">
                         <label for="tickets">Number of Tickets:</label>
                         <select id="tickets" [(ngModel)]="tickets" name="tickets" required>
                             <option *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]" [value]="n">{{ n }}</option>
                         </select>
+                    </div>
+
+                    <div class="form-row">
+                        <label for="notes">Booking notes:</label>
+                        <textarea id="notes" [(ngModel)]="notes" name="notes"></textarea>
                     </div>
 
                     <!-- Total Price -->
