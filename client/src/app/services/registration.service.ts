@@ -14,6 +14,7 @@ export class RegistrationService {
 
   // Register for an event
   registerForEvent(registration: any): Observable<any> {
+    console.log('Attempting POST to', this.apiUrl);
     return this.http.post(this.apiUrl, registration);
   }
 

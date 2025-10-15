@@ -77,7 +77,17 @@ CREATE TABLE `events` (
 
 LOCK TABLES `events` WRITE;
 /*!40000 ALTER TABLE `events` DISABLE KEYS */;
-INSERT INTO `events` VALUES (1,'5K Fun Run','Join us for a fun run to raise funds for local shelters.','2025-10-10',NULL,NULL,NULL,'Coolangatta',0.00,5000.00,2200.00,1,0,1,1),(2,'Annual Charity Gala','An elegant evening to support conservation efforts.','2025-11-15',NULL,NULL,NULL,'Gold Coast Convention Centre',120.00,20000.00,7500.00,1,0,2,2),(3,'Art Auction','Bid on local artwork and support kids education.','2025-12-01',NULL,NULL,NULL,'HOTA',0.00,8000.00,3000.00,1,0,3,3),(4,'Spring Community Fair','Family-friendly fair with stalls and live music.','2025-09-30',NULL,NULL,NULL,'Burleigh Heads Public School',5.00,3000.00,1500.00,1,0,1,4),(5,'Beach Clean-Up','Volunteer event to clean Gold Coast beaches.','2025-10-20',NULL,NULL,NULL,'Surfers Paradise Beach',0.00,1000.00,500.00,1,0,2,1),(6,'Charity Fashion Show','Showcasing local designers for a cause.','2025-12-05',NULL,NULL,NULL,'Pacific Fair Shopping Centre',45.00,7000.00,3200.00,1,0,1,2),(7,'Food Drive Gala Dinner','Help us fundraise for food packages.','2025-09-20',NULL,NULL,NULL,'JW Marriott Gold Coast',60.00,5000.00,1200.00,1,0,1,2),(8,'Vintage Auction','Collectible items auction for fundraising.','2025-09-09',NULL,NULL,NULL,'Gold Coast Convention Centre',0.00,4000.00,1000.00,1,0,3,3);
+INSERT INTO `events` 
+(`EventID`, `EventName`, `Description`, `EventDate`, `EndDate`, `StartTime`, `EndTime`, `Location`, `TicketPrice`, `GoalAmount`, `CurrentProgress`, `IsActive`, `Suspended`, `OrganisationID`, `CategoryID`)
+VALUES 
+(1,'5K Fun Run','Join us for a fun run to raise funds for local shelters.','2025-10-10','2025-10-10','07:00:00','10:00:00','Coolangatta',0.00,5000.00,2200.00,1,0,1,1),
+(2,'Annual Charity Gala','An elegant evening to support conservation efforts.','2025-11-15','2025-11-15','18:30:00','23:30:00','Gold Coast Convention Centre',120.00,20000.00,7500.00,1,0,2,2),
+(3,'Art Auction','Bid on local artwork and support kids education.','2025-12-01','2025-12-01','17:00:00','21:00:00','HOTA',0.00,8000.00,3000.00,1,0,3,3),
+(4,'Spring Community Fair','Family-friendly fair with stalls and live music.','2025-09-30','2025-09-30','09:00:00','15:00:00','Burleigh Heads Public School',5.00,3000.00,1500.00,1,0,1,4),
+(5,'Beach Clean-Up','Volunteer event to clean Gold Coast beaches.','2025-10-20','2025-10-20','08:00:00','12:00:00','Surfers Paradise Beach',0.00,1000.00,500.00,1,0,2,1),
+(6,'Charity Fashion Show','Showcasing local designers for a cause.','2025-12-05','2025-12-05','19:00:00','22:30:00','Pacific Fair Shopping Centre',45.00,7000.00,3200.00,1,0,1,2),
+(7,'Food Drive Gala Dinner','Help us fundraise for food packages.','2025-09-20','2025-09-20','18:00:00','22:00:00','JW Marriott Gold Coast',60.00,5000.00,1200.00,1,0,1,2),
+(8,'Vintage Auction','Collectible items auction for fundraising.','2025-09-09','2025-09-09','17:30:00','21:00:00','Gold Coast Convention Centre',0.00,4000.00,1000.00,1,0,3,3);
 /*!40000 ALTER TABLE `events` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,6 +149,11 @@ CREATE TABLE `registrations` (
 
 LOCK TABLES `registrations` WRITE;
 /*!40000 ALTER TABLE `registrations` DISABLE KEYS */;
+INSERT INTO registrations (EventID, FullName, Email, Phone, Tickets)
+VALUES
+(5, 'Grace Sutton', 'grace.sutton@example.com', '0413 291 000', 2),
+(5, 'Crawford James', 'crawford.james@example.com', '0402 556 812', 1),
+(3, 'Paige Robinson', 'paige.robinson@example.com', '0458 112 497', 1);
 /*!40000 ALTER TABLE `registrations` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

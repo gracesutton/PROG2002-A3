@@ -12,7 +12,7 @@ import { SearchComponent } from './search/search.component';
 import { EventComponent } from './event/event.component';
 import { RegisterComponent } from './register/register.component';
 
-
+import { TimeFormatPipe } from './time-format.pipe';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,8 @@ import { RegisterComponent } from './register/register.component';
     HomeComponent, 
     SearchComponent, 
     EventComponent, 
-    RegisterComponent
+    RegisterComponent,
+    TimeFormatPipe
   ],
   imports: [
     BrowserModule,

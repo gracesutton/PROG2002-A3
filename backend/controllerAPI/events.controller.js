@@ -64,7 +64,7 @@ async function search(req, res) {
   const { date, location, categoryID } = req.query;
 
   let sql = `
-    SELECT e.EventID, e.EventName, e.Description, e.EventDate, e.Location,
+    SELECT e.*,
            c.CategoryName, c.CategoryImage, o.OrganisationName
     FROM Events e
     JOIN Categories c ON e.CategoryID = c.CategoryID

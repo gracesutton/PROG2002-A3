@@ -21,6 +21,7 @@
                     <h3><a [routerLink]="['/event', event.EventID]">{{ event.EventName }}</a></h3>
                     <p>{{ event.Description }}</p>
                     <p>Date: {{ event.EventDate | date:'longDate' }}</p>
+                    <p>Time: {{ event.StartTime | timeFormat}} - {{ event.EndTime | timeFormat }}</p>
                     <p>Location: {{ event.Location }}</p>
                 </div>
             </div>
@@ -40,6 +41,7 @@
                     <h3><a [routerLink]="['/event', event.EventID]">{{ event.EventName }}</a></h3>
                     <p>{{ event.Description }}</p>
                     <p>Date: {{ event.EventDate | date:'longDate' }}</p>
+                    <p>Time: {{ event.StartTime | timeFormat}} - {{ event.EndTime | timeFormat }}</p>
                     <p>Location: {{ event.Location }}</p>
                 </div>
             </div>

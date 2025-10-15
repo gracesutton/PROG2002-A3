@@ -49,44 +49,43 @@ router.get('/event/:id', async (req, res) => {
 });
 
 // POST /api/registrations
-router.post('/', (req, res) => {
-  const { EventID, FullName, Email, Phone, Tickets, Notes } = req.body || {};
-  if (!EventID || !FullName || !Email) {
-    return res.status(400).json({ error: 'EventID, FullName and Email are required' });
-  }
-  const tix = Number.isInteger(Tickets) && Tickets > 0 ? Tickets : 1;
+router.post('/', async (req, res) => {
+  try {
+    const { EventID, FullName, Email, Phone, Tickets, Notes } = req.body || {};
+    if (!EventID || !FullName || !Email) {
+      return res.status(400).json({ error: 'EventID, FullName and Email are required' });
+    }
+    const tix = Number.isInteger(Tickets) && Tickets > 0 ? Tickets : 1;
 
-  // ensure event exists
-  db.query('SELECT EventID FROM Events WHERE EventID = ?', [EventID], (e1, rows) => {
-    if (e1) { console.error('check event error:', e1); return res.status(500).json({ error: 'Server error' }); }
-    if (rows.length === 0) return res.status(404).json({ error: 'Event not found' });
+    // ensure event exists
+    const [eventRows] = await db.query('SELECT EventID FROM events WHERE EventID = ?', [EventID]);
+    if (eventRows.length === 0) return res.status(404).json({ error: 'Event not found' });
 
+    // insert registration
     const insert = `
       INSERT INTO registrations (EventID, FullName, Email, Phone, Tickets, Notes)
       VALUES (?, ?, ?, ?, ?, ?)
     `;
-    db.query(
+    const [insertResult] = await db.query(
       insert,
-      [EventID, String(FullName).trim(), String(Email).trim(), Phone || null, tix, Notes || null],
-      (e2, result) => {
-        if (e2) {
-          if (e2.code === 'ER_DUP_ENTRY') return res.status(409).json({ error: 'Already registered with this email for this event.' });
-          console.error('insert error:', e2);
-          return res.status(500).json({ error: 'Server error' });
-        }
-        db.query(
-          `SELECT RegistrationID, EventID, FullName, Email, Phone, Tickets, Notes, CreatedAt
-           FROM registrations WHERE RegistrationID = ?`,
-          [result.insertId],
-          (e3, created) => {
-            if (e3) { console.error('fetch created error:', e3); return res.status(500).json({ error: 'Server error' }); }
-            res.status(201).json(created[0]);
-          }
-        );
-      }
-    );
-  });
-});
+      [EventID, String(FullName).trim(), String(Email).trim(), Phone || null, tix, Notes || null]);
 
+    // fetch and return the created registration
+    const [createdRows] = await db.query(
+      `SELECT RegistrationID, EventID, FullName, Email, Phone, Tickets, Notes, CreatedAt
+           FROM registrations WHERE RegistrationID = ?`,
+      [insertResult.insertId]
+    );
+    res.status(201).json(createdRows[0]);
+
+  } catch (err) {
+    console.error('Error creating registration:', err);
+
+    if (err.code === 'ER_DUP_ENTRY') {
+      return res.status(409).json({ error: 'Already registered with this email for this event.' });
+    }
+    res.status(500).json({ error: 'Database query failed', detail: err.message });
+  }
+});
 
 module.exports = router;

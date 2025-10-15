@@ -3,6 +3,9 @@ export interface Event {
   EventName: string;
   Description: string;
   EventDate: Date;
+  EndDate?: Date;
+  StartTime?: string;
+  EndTime?: string;
   Location: string;
   CategoryName: string;
   CategoryImage: string;
