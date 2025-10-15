@@ -1,0 +1,2 @@
+# Shows SQL files as text for github display
+*.sql text diff linguist-language=SQL
