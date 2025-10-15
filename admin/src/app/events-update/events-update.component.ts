@@ -65,6 +65,15 @@ export class EventsUpdateComponent {
     this.eventService.getEventById(+this.eventID).subscribe({
       next: (data) => {
         this.event = data;
+
+        // trim ISO strings for date inputs
+        if (this.event.EventDate) {
+          this.event.EventDate = this.event.EventDate.substring(0, 10);
+        }
+        if (this.event.EndDate) {
+          this.event.EndDate = this.event.EndDate.substring(0, 10);
+        }
+
         this.loading = false;
       },
       error: (err) => {

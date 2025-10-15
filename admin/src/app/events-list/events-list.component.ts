@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { EventService } from '../services/event.service';
 import { Event } from '../models/event';
+import { TimeFormatPipe } from '../time-format.pipe';
 
 @Component({
   selector: 'app-events-list',
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TimeFormatPipe],
   templateUrl: './events-list.component.html',
   styleUrl: './events-list.component.css'
 })

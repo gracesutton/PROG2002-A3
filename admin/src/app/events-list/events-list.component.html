@@ -10,6 +10,8 @@
                     <th>Event Name</th>
                     <th>Event Description</th>
                     <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
                     <th>Location</th>
                     <th>Category</th>
                     <th>Ticket Price</th>
@@ -17,7 +19,7 @@
                     <th>Current Progress</th>
                     <th>Organisation</th>
                     <th>Status</th>
-                    <th>Registrations</th>
+                    <th>Regs</th>
                     <th class="centred">Actions</th>
                 </tr>
             </thead>
@@ -27,13 +29,23 @@
                     <td>{{ event.EventName }}</td>
                     <td>{{ event.Description }}</td>
                     <td>{{ event.EventDate | date:'mediumDate' }}</td>
+                    <td>{{ event.StartTime | timeFormat }}</td>
+                    <td>{{ event.EndTime | timeFormat }}</td>
                     <td>{{ event.Location }}</td>
                     <td>{{ event.CategoryName }}</td>
                     <td>{{ event.TicketPrice | currency:'AUD' }}</td>
                     <td>{{ event.GoalAmount | currency:'AUD' }}</td>
                     <td>{{ event.CurrentProgress | currency:'AUD' }}</td>
                     <td>{{ event.OrganisationName }}</td>
-                    <td>{{ event.Status || "Unknown" }}</td>
+                    <td>
+                        <span [ngClass]="{
+                        'status-active': event.IsActive === 1 && event.Suspended === 0,
+                        'status-suspended': event.Suspended === 1,
+                        'status-inactive': event.IsActive === 0
+                    }">
+                            {{ event.Suspended === 1 ? 'Suspended' : (event.IsActive === 1 ? 'Active' : 'Inactive') }}
+                        </span>
+                    </td>
                     <td>{{ event.RegistrationCount || 0 }}</td>
                     <td class="centred">
                         <button [routerLink]="['/admin/event-update', event.EventID]">Edit</button>

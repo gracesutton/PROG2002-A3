@@ -3,6 +3,9 @@ export interface Event {
   EventName: string;
   Description: string;
   EventDate: string;
+  EndDate?: string;
+  StartTime?: string;
+  EndTime?: string;
   Location: string;
 
   CategoryID?: number;
@@ -19,6 +22,8 @@ export interface Event {
   Website?: string;
   Phone?: string;
 
-  Status?: string; // e.g. Active, Past, Suspended
+  IsActive?: number;   // 1 = active, 0 = inactive
+  Suspended?: number;  // 1 = suspended, 0 = not suspended
   RegistrationCount?: number;
 }
+

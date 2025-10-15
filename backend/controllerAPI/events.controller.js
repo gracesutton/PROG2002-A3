@@ -24,11 +24,14 @@ async function list(req, res) {
       e.*, 
       c.CategoryName, 
       c.CategoryImage, 
-      o.OrganisationName
+      o.OrganisationName,
+      COUNT(r.RegistrationID) AS RegistrationCount
     FROM events e
     JOIN categories c ON e.CategoryID = c.CategoryID
     JOIN organisations o ON e.OrganisationID = o.OrganisationID
+    LEFT JOIN registrations r ON e.EventID = r.EventID
     ${where.length ? 'WHERE ' + where.join(' AND ') : ''}
+    GROUP BY e.EventID
     ORDER BY EventDate, COALESCE(StartTime, '00:00:00')
   `;
   try {

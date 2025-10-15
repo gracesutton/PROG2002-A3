@@ -5,15 +5,32 @@
     <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
 
     <form id="edit-event-form" *ngIf="event" (ngSubmit)="updateEvent()" #form="ngForm">
-        
+
         <label>Event Name</label>
         <input type="text" [(ngModel)]="event.EventName" name="EventName" required />
 
         <label>Description</label>
         <textarea [(ngModel)]="event.Description" name="Description"></textarea>
 
-        <label>Date</label>
-        <input type="date" [(ngModel)]="event.EventDate" name="EventDate" required />
+        <div id="event-timings-div">
+            <div id="timings-left">
+
+                <label>Start Date</label>
+                <input type="date" [(ngModel)]="event.EventDate" name="EventDate" required />
+
+                <label>Start Time</label>
+                <input type="time" [(ngModel)]="event.StartTime" name="StartTime" required />
+
+            </div>
+            <div id="timings-right">
+
+                <label>End Date</label>
+                <input type="date" [(ngModel)]="event.EndDate" name="EndDate" required/>
+
+                <label>End Time</label>
+                <input type="time" [(ngModel)]="event.EndTime" name="EndTime" required/>
+            </div>
+        </div>
 
         <label>Location</label>
         <input type="text" [(ngModel)]="event.Location" name="Location" required />
@@ -36,6 +53,17 @@
 
         <label>Current Progress</label>
         <input type="number" [(ngModel)]="event.CurrentProgress" name="CurrentProgress" />
+
+        <div class="form-row" id="status-checkboxes">
+            <label>
+                <input type="checkbox" [(ngModel)]="event.IsActive" name="IsActive" [value]="1" />
+                Active
+            </label>
+            <label>
+                <input type="checkbox" [(ngModel)]="event.Suspended" name="Suspended" [value]="1" />
+                Suspended
+            </label>
+        </div>
 
         <div class="buttons">
             <button type="submit" [disabled]="!form.valid">Save</button>

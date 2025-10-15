@@ -10,8 +10,25 @@
         <label>Description</label>
         <textarea [(ngModel)]="event.Description" name="Description"></textarea>
 
-        <label>Date</label>
-        <input type="date" [(ngModel)]="event.EventDate" name="EventDate" required />
+        <div id="event-timings-div">
+            <div id="timings-left">
+
+                <label>Start Date</label>
+                <input type="date" [(ngModel)]="event.EventDate" name="EventDate" required />
+
+                <label>Start Time</label>
+                <input type="time" [(ngModel)]="event.StartTime" name="StartTime" required />
+
+            </div>
+            <div id="timings-right">
+
+                <label>End Date</label>
+                <input type="date" [(ngModel)]="event.EndDate" name="EndDate" required/>
+
+                <label>End Time</label>
+                <input type="time" [(ngModel)]="event.EndTime" name="EndTime" required/>
+            </div>
+        </div>
 
         <label>Location</label>
         <input type="text" [(ngModel)]="event.Location" name="Location" required />
