@@ -7,9 +7,9 @@ import { EventsUpdateComponent } from './events-update/events-update.component';
 
 export const routes: Routes = [
 
-    {path:"admin", component:AdminHomeComponent},
-    {path:"admin/event-list", component:EventsListComponent},
-    {path:"admin/event-create", component:EventsCreateComponent},
-    {path:"admin/event-update/:id", component:EventsUpdateComponent},
+    {path:"", component:AdminHomeComponent},
+    {path:"event-list", component:EventsListComponent},
+    {path:"event-create", component:EventsCreateComponent},
+    {path:"event-update/:id", component:EventsUpdateComponent},
 
 ];

@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 })
 export class RegistrationService {
 
-  private apiUrl = 'http://localhost:8080/api/registrations'; // // later replace with kydans live URL
+  private apiUrl = 'https://23290509.it.scu.edu.au/prog2002/goldcoastcharityconnect/api/registrations'; // // later replace with kydans live URL
 
   constructor(private http: HttpClient) { }
 

@@ -9,7 +9,7 @@ import { Event } from '../models/event';
 
 export class EventService {
 
-  private apiUrl = 'http://localhost:8080/api/events';
+  private apiUrl = 'https://23290509.it.scu.edu.au/prog2002/goldcoastcharityconnect/api/events';
 
   constructor(private http: HttpClient) { }
 

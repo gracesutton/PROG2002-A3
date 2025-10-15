@@ -9,7 +9,7 @@ import { Event } from '../models/event';
 
 export class EventService {
 
-  private apiUrl = 'http://localhost:8080/api/events';
+  private apiUrl = 'https://23290509.it.scu.edu.au/prog2002/goldcoastcharityconnect/api/events';
 
   constructor(private http: HttpClient) { }
 
@@ -20,7 +20,7 @@ export class EventService {
 
   // Get all categories
   getCategories(): Observable<Event[]> {
-    return this.http.get<Event[]>('http://localhost:8080/api/categories/list');
+    return this.http.get<Event[]>('https://23290509.it.scu.edu.au/prog2002/goldcoastcharityconnect/api/categories/list');
   }
 
   // Search events based on parameters

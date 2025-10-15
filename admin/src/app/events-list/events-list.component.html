@@ -48,7 +48,7 @@
                     </td>
                     <td>{{ event.RegistrationCount || 0 }}</td>
                     <td class="centred">
-                        <button [routerLink]="['/admin/event-update', event.EventID]">Edit</button>
+                        <button [routerLink]="['/event-update', event.EventID]">Edit</button>
                         <button (click)="deleteEvent(event.EventID)">Delete</button>
                     </td>
                 </tr>

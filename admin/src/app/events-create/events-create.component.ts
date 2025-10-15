@@ -51,14 +51,14 @@ export class EventsCreateComponent {
   }
 
   loadCategories() {
-    this.http.get<any[]>('http://localhost:8080/api/admin/categories').subscribe({
+    this.http.get<any[]>('https://23290509.it.scu.edu.au/prog2002/goldcoastcharityconnect/api/admin/categories').subscribe({
       next: (data) => (this.categories = data),
       error: (err) => console.error('Failed to load categories:', err)
     });
   }
 
   loadOrganisations() {
-    this.http.get<any[]>('http://localhost:8080/api/admin/organisations').subscribe({
+    this.http.get<any[]>('https://23290509.it.scu.edu.au/prog2002/goldcoastcharityconnect/api/admin/organisations').subscribe({
       next: (data) => (this.organisations = data),
       error: (err) => console.error('Failed to load organisations:', err)
     });

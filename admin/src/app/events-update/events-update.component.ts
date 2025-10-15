@@ -45,14 +45,14 @@ export class EventsUpdateComponent {
   }
 
   loadCategories() {
-    this.http.get<any[]>('http://localhost:8080/api/admin/categories').subscribe({
+    this.http.get<any[]>('https://23290509.it.scu.edu.au/prog2002/goldcoastcharityconnect/api/admin/categories').subscribe({
       next: (data) => (this.categories = data),
       error: (err) => console.error('Failed to load categories:', err)
     });
   }
 
   loadOrganisations() {
-    this.http.get<any[]>('http://localhost:8080/api/admin/organisations').subscribe({
+    this.http.get<any[]>('https://23290509.it.scu.edu.au/prog2002/goldcoastcharityconnect/api/admin/organisations').subscribe({
       next: (data) => (this.organisations = data),
       error: (err) => console.error('Failed to load organisations:', err)
     });
@@ -104,7 +104,7 @@ export class EventsUpdateComponent {
       next: () => {
         alert('Event updated successfully!');
         console.log('Event updated:', this.event);
-        setTimeout(() => this.router.navigate(['/admin/event-list']), 1500);
+        setTimeout(() => this.router.navigate(['event-list']), 1500);
       },
       error: (err) => {
         console.error('Update failed:', err);
