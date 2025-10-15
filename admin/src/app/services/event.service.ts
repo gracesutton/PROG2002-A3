@@ -15,7 +15,7 @@ export class EventService {
 
   // Get all events
   getEvents(): Observable<Event[]> {
-    return this.http.get<Event[]>(this.apiUrl);
+    return this.http.get<Event[]>(`${this.apiUrl}?includeInactive=true&includeSuspended=true`);
   }
 
   // Get all categories
@@ -55,7 +55,7 @@ export class EventService {
   }
 
   // Update event by ID
-  updateEvent(id: number, event: Event): Observable<any> {
+  updateEvent(id: number, event: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}`, event);
   }
 

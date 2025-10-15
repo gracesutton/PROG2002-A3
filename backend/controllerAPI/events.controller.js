@@ -10,8 +10,8 @@ async function list(req, res) {
   const where = [];
   const params = [];
 
-  if (!includeSuspended) where.push('Suspended = 0');
-  if (!includeInactive) where.push('IsActive = 1');
+  if (includeSuspended !== 'true') where.push('Suspended = 0');
+  if (includeInactive === 'false') where.push('IsActive = 1');
 
   if (from) { where.push('EventDate >= ?'); params.push(from); }
   if (to) { where.push('COALESCE(EndDate, EventDate) <= ?'); params.push(to); }

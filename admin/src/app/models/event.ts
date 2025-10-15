@@ -22,8 +22,8 @@ export interface Event {
   Website?: string;
   Phone?: string;
 
-  IsActive?: number;   // 1 = active, 0 = inactive
-  Suspended?: number;  // 1 = suspended, 0 = not suspended
+  IsActive?: boolean;   // 1 = active, 0 = inactive
+  Suspended?: boolean;  // 1 = suspended, 0 = not suspended
   RegistrationCount?: number;
 }
 

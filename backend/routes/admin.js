@@ -11,8 +11,8 @@ router.get('/events', async (req, res) => {
   const where = [];
   const params = [];
 
-  if (!includeSuspended) where.push('Suspended = 0');
-  if (!includeInactive)  where.push('IsActive = 1');
+  if (includeSuspended !== 'true') where.push('Suspended = 0');
+  if (includeInactive === 'false') where.push('IsActive = 1');
 
   const sql = `
     SELECT * FROM events

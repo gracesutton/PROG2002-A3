@@ -39,11 +39,11 @@
                     <td>{{ event.OrganisationName }}</td>
                     <td>
                         <span [ngClass]="{
-                        'status-active': event.IsActive === 1 && event.Suspended === 0,
-                        'status-suspended': event.Suspended === 1,
-                        'status-inactive': event.IsActive === 0
+                        'status-active': event.IsActive && !event.Suspended,
+                        'status-suspended': event.Suspended,
+                        'status-inactive': !event.IsActive
                     }">
-                            {{ event.Suspended === 1 ? 'Suspended' : (event.IsActive === 1 ? 'Active' : 'Inactive') }}
+                            {{ event.Suspended ? 'Suspended' : (event.IsActive ? 'Active' : 'Inactive') }}
                         </span>
                     </td>
                     <td>{{ event.RegistrationCount || 0 }}</td>

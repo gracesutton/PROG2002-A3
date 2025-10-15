@@ -74,6 +74,10 @@ export class EventsUpdateComponent {
           this.event.EndDate = this.event.EndDate.substring(0, 10);
         }
 
+        // normalize binary flags
+        this.event.IsActive = !!this.event.IsActive;
+        this.event.Suspended = !!this.event.Suspended;
+
         this.loading = false;
       },
       error: (err) => {
@@ -89,9 +93,17 @@ export class EventsUpdateComponent {
 
     if (!this.event) return;
 
-    this.eventService.updateEvent(this.eventID, this.event).subscribe({
+    // convert boolean to int for backend
+    const updatedEvent = {
+      ...this.event,
+      IsActive: this.event.IsActive ? 1 : 0,
+      Suspended: this.event.Suspended ? 1 : 0
+    };
+
+    this.eventService.updateEvent(updatedEvent.EventID, updatedEvent).subscribe({
       next: () => {
         alert('Event updated successfully!');
+        console.log('Event updated:', this.event);
         setTimeout(() => this.router.navigate(['/admin/event-list']), 1500);
       },
       error: (err) => {
