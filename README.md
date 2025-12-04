@@ -2,11 +2,18 @@
 
 Gold Coast Charity Connect
 PROG2002 Web Development II - Assessment 3
-By Grace Sutton (#23290509) & Kydan Jenkins (#?)
+By Grace Sutton & Kydan Jenkins
 
 Gold Coast Charity Connect is a full-stack web application that centralises charity events within the Gold Coast area. 
 
 This A3 version extends the A2 project by introducing event registration, an admin dashboard, and a RESTful API, now restructured using the Angular framework for the client-side interface.
+
+This project has been deployed live on cPanel here:
+* Client-side: https://23290509.it.scu.edu.au/prog2002/goldcoastcharityconnect/client/
+* Admin dashboard: https://23290509.it.scu.edu.au/prog2002/goldcoastcharityconnect/admin/
+* API: https://23290509.it.scu.edu.au/prog2002/goldcoastcharityconnect/api/
+
+Read below for more information and local hosting details.
 
 ## Overview
 
